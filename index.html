@@ -32,6 +32,21 @@
     .head{font-weight:700;text-align:center;background:var(--color-surface);position:sticky;top:0;z-index:2}.rowhead{font-weight:700;background:var(--color-surface);position:sticky;left:0;z-index:1}
     .sub{display:block;font-size:.88rem;color:var(--color-text-muted);font-weight:400;margin-top:.25rem}
     .monthbox{display:flex;flex-direction:column;gap:.5rem}.block{padding:.6rem .65rem;border-radius:.7rem;color:#fff;font-weight:700;font-size:.95rem;line-height:1.25}.travel{outline:3px solid var(--color-travel)} .hours{display:inline-block;margin-top:.35rem;font-size:.82rem;background:rgba(255,255,255,.18);padding:.18rem .45rem;border-radius:999px}
+    .auto-calendar-shell{margin-top:1rem;padding:1rem;border:1px dashed var(--color-border);border-radius:.8rem;background:var(--color-surface-2)}
+    .auto-calendar-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+    .auto-calendar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+    .month-card{padding:1rem;border-radius:.85rem;border:1px solid var(--color-border);background:var(--color-surface);box-shadow:var(--shadow)}
+    .month-card h4{font-size:1.05rem;margin-bottom:.55rem}
+    .month-card p{font-size:.95rem;margin:.35rem 0;line-height:1.4}
+    .month-card.crc{border-left:8px solid var(--color-crc)}
+    .month-card.king{border-left:8px solid var(--color-king)}
+    .month-card.vusn{border-left:8px solid var(--color-vusn)}
+    .month-card.access{border-left:8px solid var(--color-access)}
+    .month-card.scholarship{border-left:8px solid var(--color-scholar)}
+    .month-card.global{border-left:8px solid var(--color-global)}
+    .month-card.ahca{border-left:8px solid var(--color-ahca)}
+    .month-card.low{border-left:8px solid var(--color-low)}
+    .month-card.travel-flag{outline:3px solid var(--color-travel);outline-offset:1px}
     .weekly{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-4)}
     .weekly .card,.dash-grid .card,.detail-grid .card{padding:var(--space-5)}
     .dash-grid,.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:var(--space-4)}
@@ -74,6 +89,67 @@
     <h2>Month-by-month operational calendar</h2>
     <p class="muted" style="margin-top:.5rem;max-width:1100px;">Each month lists the highest-priority operational blocks. Red-outlined items include travel or physical presence requirements. Hours are estimated monthly effort by entity to make tradeoffs visible.</p>
     <div class="grid" id="calendar"></div>
+    <div class="auto-calendar-shell">
+      <div class="auto-calendar-head">
+        <div>
+          <h3>Excel-published update feed</h3>
+          <p class="muted small" style="margin-top:.35rem;max-width:900px;">This section is designed to be replaced automatically from your Excel workbook and publish script. Keep the markers intact so GitHub + Vercel can update the live dashboard without manual HTML editing.</p>
+        </div>
+        <span class="flag build">Automation-ready</span>
+      </div>
+      <div class="auto-calendar-grid" id="excel-calendar-feed">
+        <!-- BEGIN CALENDAR -->
+        <div class="month-card crc">
+          <h4>June 2026 — CRC</h4>
+          <p><strong>Status:</strong> In progress | <strong>Completion:</strong> 35% | <strong>Priority:</strong> High | <strong>Hours/week:</strong> 32 | <strong>Travel:</strong> N</p>
+          <p><strong>Focus:</strong> Assess CRC footprint and define primary care integration blueprint.</p>
+          <p><strong>Update:</strong> Discovery underway; acquired practice assessment started.</p>
+        </div>
+        <div class="month-card king">
+          <h4>June 2026 — King</h4>
+          <p><strong>Status:</strong> In progress | <strong>Completion:</strong> 20% | <strong>Priority:</strong> Medium | <strong>Hours/week:</strong> 8 | <strong>Travel:</strong> N</p>
+          <p><strong>Focus:</strong> Map AY 26–27 roles, deliverables, and grant expectations.</p>
+          <p><strong>Update:</strong> Academic year map drafted.</p>
+        </div>
+        <div class="month-card access">
+          <h4>June 2026 — Access to Care TN</h4>
+          <p><strong>Status:</strong> In progress | <strong>Completion:</strong> 25% | <strong>Priority:</strong> Medium | <strong>Hours/week:</strong> 4 | <strong>Travel:</strong> N</p>
+          <p><strong>Focus:</strong> Draft bylaws and membership redesign proposal.</p>
+          <p><strong>Update:</strong> Governance options outlined.</p>
+        </div>
+        <div class="month-card scholarship">
+          <h4>June 2026 — Scholarship</h4>
+          <p><strong>Status:</strong> In progress | <strong>Completion:</strong> 15% | <strong>Priority:</strong> Medium | <strong>Hours/week:</strong> 3 | <strong>Travel:</strong> N</p>
+          <p><strong>Focus:</strong> Public Health manuscript sprint.</p>
+          <p><strong>Update:</strong> Weekly writing block protected.</p>
+        </div>
+        <div class="month-card global">
+          <h4>June 2026 — JHU / SONSIEL / Global</h4>
+          <p><strong>Status:</strong> In progress | <strong>Completion:</strong> 30% | <strong>Priority:</strong> Medium | <strong>Hours/week:</strong> 3 | <strong>Travel:</strong> N</p>
+          <p><strong>Focus:</strong> Stand up SONSIEL liaison operating framework.</p>
+          <p><strong>Update:</strong> Digest and one-pager templates drafted.</p>
+        </div>
+        <div class="month-card ahca travel-flag">
+          <h4>October 2026 — AHCA / Conferences</h4>
+          <p><strong>Status:</strong> Planned | <strong>Completion:</strong> 0% | <strong>Priority:</strong> High | <strong>Hours/week:</strong> 4 | <strong>Travel:</strong> Y</p>
+          <p><strong>Focus:</strong> UNM Mentoring Conference: prep and presentation.</p>
+          <p><strong>Update:</strong> Conference fixed for Oct 19–23, 2026.</p>
+        </div>
+        <div class="month-card king travel-flag">
+          <h4>January 2027 — King</h4>
+          <p><strong>Status:</strong> Planned | <strong>Completion:</strong> 0% | <strong>Priority:</strong> High | <strong>Hours/week:</strong> 16 | <strong>Travel:</strong> Y</p>
+          <p><strong>Focus:</strong> Spring 2027 term start and on-site week.</p>
+          <p><strong>Update:</strong> Academic anchor month.</p>
+        </div>
+        <div class="month-card vusn travel-flag">
+          <h4>September 2027 — VUSN</h4>
+          <p><strong>Status:</strong> Planned | <strong>Completion:</strong> 0% | <strong>Priority:</strong> High | <strong>Hours/week:</strong> 5 | <strong>Travel:</strong> Possible</p>
+          <p><strong>Focus:</strong> Presidential handoff and legacy communication.</p>
+          <p><strong>Update:</strong> Closeout and transition.</p>
+        </div>
+        <!-- END CALENDAR -->
+      </div>
+    </div>
   </section>
 
   <section class="section weekly">
@@ -296,7 +372,8 @@ const entities=[
   {name:'Scholarship', color:'#6d28d9', subtitle:'Compressed writing and research sprints', kpis:['Public Health manuscript submitted','Ethiopia/Iraq project completed in 4–6 months','At least one APRN barriers policy or scholarly output produced','AANP and related content fed by actual project data'], flags:['Must be sprint-based, not diffuse','Best protected in Friday AM or weekend micro-blocks']},
   {name:'JHU / SONSIEL / Global', color:'#0f766e', subtitle:'UN aging, IPS-aligned work, pathway building', kpis:['Monthly digest issued','One-page event reports filed within 5 business days','Quarterly board metrics dashboard updated','At least one IPS-aligned output produced within 6–8 months','Nurse engagement pathway advancement documented'], flags:['Good platform for national/international positioning if outputs stay disciplined']},
   {name:'AHCA / Conferences', color:'#7c3aed', subtitle:'Education subcommittee, care coordination, UNM, AANP', kpis:['Education subcommittee cadence established','Quarterly educational agenda delivered','UNM conference commitment executed smoothly','AANP 2027 content advanced on schedule','Care coordination role maintained without excess drag'], flags:['UNM week is travel-flagged in Oct 2026']},
-  {name:'A4AL / low-weight', color:'#6b7280', subtitle:'Minimal but intentional contribution', kpis:['1–2 advisory contributions annually','Board visibility maintained','No major schedule creep'], flags:['This role should stay strictly limited']}];
+  {name:'A4AL / low-weight', color:'#6b7280', subtitle:'Minimal but intentional contribution', kpis:['1–2 advisory contributions annually','Board visibility maintained','No major schedule creep'], flags:['This role should stay strictly limited']}
+];
 const dashboards=document.getElementById('dashboards');
 entities.forEach(e=>{
   const card=document.createElement('div'); card.className='card';
