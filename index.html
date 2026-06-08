@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark Miller Operational Portfolio Plan</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@500,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: 0.92rem; --text-sm: 1rem; --text-base: 1.08rem; --text-lg: 1.28rem; --text-xl: 2.1rem;
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+      --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;--color-border:#d4d1ca;--color-text:#28251d;--color-text-muted:#66645f;
+      --color-crc:#0b6e4f;--color-king:#1f4e79;--color-vusn:#8c1d40;--color-access:#d97706;--color-scholar:#6d28d9;--color-global:#0f766e;--color-ahca:#7c3aed;--color-low:#6b7280;--color-travel:#b91c1c;
+      --shadow:0 6px 18px rgba(0,0,0,.08);--radius:.9rem;--font-body:'Satoshi',sans-serif;--font-display:'Cabinet Grotesk',sans-serif;
+    }
+    [data-theme="dark"] {--color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;--color-border:#393836;--color-text:#ece7df;--color-text-muted:#b0a99d;--shadow:0 6px 18px rgba(0,0,0,.35)}
+    *{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth} body{font-family:var(--font-body);font-size:var(--text-base);line-height:1.5;background:var(--color-bg);color:var(--color-text)}
+    .wrap{max-width:1600px;margin:0 auto;padding:var(--space-6)}
+    h1,h2,h3,h4{font-family:var(--font-display);line-height:1.08} h1{font-size:var(--text-xl)} h2{font-size:1.6rem} h3{font-size:1.25rem}
+    .muted{color:var(--color-text-muted)} .small{font-size:var(--text-sm)}
+    .top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-4);flex-wrap:wrap;margin-bottom:var(--space-8)}
+    .btn{border:1px solid var(--color-border);background:var(--color-surface);padding:.8rem 1rem;border-radius:999px;cursor:pointer;font-size:var(--text-sm)}
+    .card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero{padding:var(--space-6)} .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-4);margin:var(--space-6) 0}
+    .summary .card{padding:var(--space-5)} .big{font-size:2rem;font-weight:700;margin:.3rem 0}
+    .legend{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}.pill{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .85rem;border-radius:999px;background:var(--color-surface-2);border:1px solid var(--color-border);font-size:var(--text-sm)} .dot{width:.9rem;height:.9rem;border-radius:50%}
+    .section{margin:0 0 var(--space-8)}
+    .calendar-card{padding:var(--space-5);overflow:auto}
+    .grid{display:grid;grid-template-columns:280px repeat(16,minmax(120px,1fr));min-width:2250px;border-top:1px solid var(--color-border);border-left:1px solid var(--color-border);margin-top:1rem}
+    .cell{border-right:1px solid var(--color-border);border-bottom:1px solid var(--color-border);padding:.8rem;background:var(--color-surface-2);font-size:var(--text-sm)}
+    .head{font-weight:700;text-align:center;background:var(--color-surface);position:sticky;top:0;z-index:2}.rowhead{font-weight:700;background:var(--color-surface);position:sticky;left:0;z-index:1}
+    .sub{display:block;font-size:.88rem;color:var(--color-text-muted);font-weight:400;margin-top:.25rem}
+    .monthbox{display:flex;flex-direction:column;gap:.5rem}.block{padding:.6rem .65rem;border-radius:.7rem;color:#fff;font-weight:700;font-size:.95rem;line-height:1.25}.travel{outline:3px solid var(--color-travel)} .hours{display:inline-block;margin-top:.35rem;font-size:.82rem;background:rgba(255,255,255,.18);padding:.18rem .45rem;border-radius:999px}
+    .weekly{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-4)}
+    .weekly .card,.dash-grid .card,.detail-grid .card{padding:var(--space-5)}
+    .dash-grid,.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:var(--space-4)}
+    .kpis{display:grid;gap:.65rem;margin-top:1rem}.kpi{padding:.75rem .8rem;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:.7rem;font-size:var(--text-sm)}
+    .weektable{width:100%;border-collapse:collapse;margin-top:1rem}.weektable th,.weektable td{padding:.8rem;border-bottom:1px solid var(--color-border);text-align:left;vertical-align:top}.weektable th{font-family:var(--font-display);font-size:1rem}
+    .flag{display:inline-block;padding:.28rem .55rem;border-radius:999px;font-size:.82rem;font-weight:700;margin-right:.35rem;margin-top:.2rem}.flag.travel{background:#fee2e2;color:#991b1b;outline:none}.flag.fixed{background:#dbeafe;color:#1d4ed8}.flag.high{background:#ecfccb;color:#3f6212}.flag.build{background:#f3e8ff;color:#6b21a8}
+    canvas{max-width:100%}
+    @media (max-width: 980px){.weekly{grid-template-columns:1fr}.wrap{padding:1rem}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Operational 16-Month Calendar + KPI Model</h1>
+      <p class="muted" style="margin-top:.8rem;max-width:1000px;">This revised version is built for readability and execution. It uses larger text, month-by-month operational blocks, weekly workload structure, estimated hours, travel flags, and detailed KPI dashboards across CRC, King, VUSN, Access to Care Tennessee, scholarship, global policy work, AHCA/conference commitments, and maintenance roles.</p>
+      <div class="legend">
+        <span class="pill"><span class="dot" style="background:var(--color-crc)"></span>CRC</span>
+        <span class="pill"><span class="dot" style="background:var(--color-king)"></span>King</span>
+        <span class="pill"><span class="dot" style="background:var(--color-vusn)"></span>VUSN</span>
+        <span class="pill"><span class="dot" style="background:var(--color-access)"></span>Access to Care TN</span>
+        <span class="pill"><span class="dot" style="background:var(--color-scholar)"></span>Scholarship</span>
+        <span class="pill"><span class="dot" style="background:var(--color-global)"></span>JHU / SONSIEL / Global</span>
+        <span class="pill"><span class="dot" style="background:var(--color-ahca)"></span>AHCA / Conferences</span>
+        <span class="pill"><span class="dot" style="background:var(--color-low)"></span>Low-weight</span>
+        <span class="pill"><span class="dot" style="background:var(--color-travel)"></span>Travel flag</span>
+      </div>
+    </div>
+    <button class="btn" data-theme-toggle>Toggle theme</button>
+  </div>
+
+  <div class="summary">
+    <div class="card"><div class="muted small">Core priority</div><div class="big">CRC</div><div class="small muted">Protected as the dominant weekly commitment because it is your primary executive-growth role and main revenue source.</div></div>
+    <div class="card"><div class="muted small">Fixed travel anchors</div><div class="big">King + UNM</div><div class="small muted">King term starts and the Oct. 19–23, 2026 UNM conference define non-flex windows.</div></div>
+    <div class="card"><div class="muted small">Leadership window</div><div class="big">VUSN Sept 2026–Sept 2027</div><div class="small muted">Presidential year should produce structural board reform plus 1–2 legacy items.</div></div>
+    <div class="card"><div class="muted small">Strategic overlay</div><div class="big">Policy + scholarship</div><div class="small muted">These roles should amplify CRC and your national nurse leader positioning, not compete with it.</div></div>
+  </div>
+
+  <section class="section card calendar-card">
+    <h2>Month-by-month operational calendar</h2>
+    <p class="muted" style="margin-top:.5rem;max-width:1100px;">Each month lists the highest-priority operational blocks. Red-outlined items include travel or physical presence requirements. Hours are estimated monthly effort by entity to make tradeoffs visible.</p>
+    <div class="grid" id="calendar"></div>
+  </section>
+
+  <section class="section weekly">
+    <div class="card">
+      <h2>Weekly operating model</h2>
+      <p class="muted" style="margin-top:.5rem;">Use this as the default weekly block pattern outside of travel weeks and academic anchor periods.</p>
+      <table class="weektable">
+        <thead><tr><th>Day</th><th>Primary blocks</th><th>Hours</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monday</strong></td><td>CRC primary care integration leadership, COO/operations workstream, Harbor Village only until replacement is completed.</td><td>9–10</td></tr>
+          <tr><td><strong>Tuesday</strong></td><td>CRC rollout + Villa Maria while active, finance/RCM model refinement, AHCA or government affairs touchpoint as needed.</td><td>9–10</td></tr>
+          <tr><td><strong>Wednesday</strong></td><td>CRC pilot execution, regional succession work, Harbor Village while active, team development and dashboard review.</td><td>9–10</td></tr>
+          <tr><td><strong>Thursday</strong></td><td>CRC implementation + Villa Maria while active, government affairs, external stakeholder and partner calls.</td><td>9–10</td></tr>
+          <tr><td><strong>Friday</strong></td><td>King faculty/coordinator block, grants process, scholarship sprint, coalition/board leadership, lighter external meetings.</td><td>8–9</td></tr>
+          <tr><td><strong>Weekend buffer</strong></td><td>Travel, conference prep, manuscript cleanup, VUSN or SONSIEL overflow only when necessary.</td><td>2–4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Estimated weekly hour mix</h2>
+      <canvas id="hoursChart" height="240"></canvas>
+      <div class="kpis">
+        <div class="kpi">CRC target operating share: approximately 28–34 hours per week during most months.</div>
+        <div class="kpi">King target: approximately 8–10 hours weekly, rising in term-launch weeks and accreditation/administrative bursts.</div>
+        <div class="kpi">Volunteer/policy/service work combined should generally stay within 6–10 hours weekly unless a conference, board transition, or legislative moment is active.</div>
+        <div class="kpi">Scholarship should run in focused 2–4 hour sprints rather than diffuse background time.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 style="margin-bottom:1rem;">KPI dashboards by entity</h2>
+    <div class="dash-grid" id="dashboards"></div>
+  </section>
+
+  <section class="section">
+    <h2 style="margin-bottom:1rem;">Execution notes by workstream</h2>
+    <div class="detail-grid">
+      <div class="card">
+        <h3>CRC operational intent</h3>
+        <div class="kpis">
+          <div class="kpi">Build the acquired primary care model into a CRC-ready enterprise blueprint, then pilot, refine, and scale.</div>
+          <div class="kpi">Recruit replacements and successors fast enough that rounding and regional burdens taper as enterprise work expands.</div>
+          <div class="kpi">Use AHCA and government affairs as amplifiers of CRC outcomes, not stand-alone obligations.</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>King operational intent</h3>
+        <div class="kpis">
+          <div class="kpi">Treat King as a stable academic platform with hard seasonal peaks, especially onsite term starts and late-April/early-May ceremonies.</div>
+          <div class="kpi">Create a lightweight but durable grant opportunity process: weekly scan, living tracker, monthly digest, documented handoff logic.</div>
+          <div class="kpi">Use King as the academic anchor for multi-site scholarship and policy credibility.</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Leadership positioning intent</h3>
+        <div class="kpis">
+          <div class="kpi">VUSN, Access to Care TN, SONSIEL, and JHU IPS should all tell one coherent story: advanced practice nursing leadership in care access, policy, and system design.</div>
+          <div class="kpi">Every service role should yield at least one visible structural output and one reputation-building output.</div>
+          <div class="kpi">Keep A4AL intentionally low-weight so it remains a board affiliation rather than a drag on execution.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+const months = ['Jun 2026','Jul 2026','Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027','Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027'];
+const rows = [
+  {name:'CRC', sub:'Primary care rollout, ops, successions, govt affairs', months:[
+    [{t:'Model assessment + blueprint', c:'var(--color-crc)', h:'32h/wk'},{t:'Harbor/Villa active + successor search', c:'var(--color-crc)', h:'12h/wk'}],
+    [{t:'COO alignment + integration charter', c:'var(--color-crc)', h:'34h/wk'},{t:'Pilot workstreams formed', c:'var(--color-crc)', h:'6h/wk'}],
+    [{t:'Pilot prep + clinical tools', c:'var(--color-crc)', h:'34h/wk'}],
+    [{t:'Pilot launch phase', c:'var(--color-crc)', h:'34h/wk'},{t:'Govt affairs expansion', c:'var(--color-crc)', h:'6h/wk', travel:true}],
+    [{t:'UNM / conference overlap planning', c:'var(--color-crc)', h:'30h/wk', travel:true},{t:'Refine workflows', c:'var(--color-crc)', h:'6h/wk'}],
+    [{t:'Pilot optimization + metrics', c:'var(--color-crc)', h:'32h/wk'}],
+    [{t:'Year-end review + succession progress', c:'var(--color-crc)', h:'28h/wk'}],
+    [{t:'Spring execution reset', c:'var(--color-crc)', h:'34h/wk'}],
+    [{t:'Scale / add markets', c:'var(--color-crc)', h:'34h/wk'}],
+    [{t:'Value realization + staffing refinement', c:'var(--color-crc)', h:'32h/wk'}],
+    [{t:'Travel-aware continuity plan', c:'var(--color-crc)', h:'28h/wk'}],
+    [{t:'Summer continuity during King events', c:'var(--color-crc)', h:'26h/wk', travel:true}],
+    [{t:'Expansion + external positioning', c:'var(--color-crc)', h:'30h/wk'}],
+    [{t:'AANP / national content build', c:'var(--color-crc)', h:'28h/wk'}],
+    [{t:'Leadership dashboard refresh', c:'var(--color-crc)', h:'28h/wk'}],
+    [{t:'Annual review + next scale plan', c:'var(--color-crc)', h:'28h/wk'}]
+  ]},
+  {name:'King', sub:'Faculty, coordinator, grants, onsite anchors', months:[
+    [{t:'Set annual course/admin map', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Grant tracker + digest build', c:'var(--color-king)', h:'10h/wk'}],
+    [{t:'Fall start on-site week', c:'var(--color-king)', h:'16h/wk', travel:true}],
+    [{t:'Post-launch stabilization', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Routine faculty/coordinator load', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Monthly grant cycle steady state', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'End-of-term closeout', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Spring start on-site week', c:'var(--color-king)', h:'16h/wk', travel:true}],
+    [{t:'Grant opportunity reporting', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Program coordination and advising', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Graduation / pinning prep week', c:'var(--color-king)', h:'12h/wk', travel:true}],
+    [{t:'Summer start on-site week', c:'var(--color-king)', h:'16h/wk', travel:true}],
+    [{t:'Routine term work', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Grant scan and faculty prompts', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Fall 2027 pre-planning', c:'var(--color-king)', h:'8h/wk'}],
+    [{t:'Academic year transition prep', c:'var(--color-king)', h:'8h/wk'}]
+  ]},
+  {name:'VUSN', sub:'President-elect to President', months:[
+    [],[],[],
+    [{t:'Presidency begins + ICN-NP visibility', c:'var(--color-vusn)', h:'6h/wk', travel:true}],
+    [{t:'Committee activation + structure', c:'var(--color-vusn)', h:'5h/wk'}],
+    [{t:'Operational cadence solidified', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Fogel Award proposal build', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Board cadence maintained', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Mentoring / engagement initiative', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Legacy item development', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Signature deliverable push', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Visibility and stewardship', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Board refinement', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Legacy output completion', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Transition prep', c:'var(--color-vusn)', h:'4h/wk'}],
+    [{t:'Presidential handoff + final legacy framing', c:'var(--color-vusn)', h:'5h/wk'}]
+  ]},
+  {name:'Access to Care TN', sub:'Chair, bylaws, membership redesign, policy action', months:[
+    [{t:'Bylaw redesign', c:'var(--color-access)', h:'4h/wk'}],
+    [{t:'Membership model build', c:'var(--color-access)', h:'4h/wk'}],
+    [{t:'Stakeholder alignment', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Operational roadmap adoption', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Public identity / messaging', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Cadence maintenance', c:'var(--color-access)', h:'2h/wk'}],
+    [{t:'Coalition engagement', c:'var(--color-access)', h:'2h/wk'}],
+    [{t:'Legislative prep', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Policy meetings + testimony pathway', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Campaign or summit build', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Signature moment prep', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Coalition visibility event', c:'var(--color-access)', h:'3h/wk'}],
+    [{t:'Member growth maintenance', c:'var(--color-access)', h:'2h/wk'}],
+    [{t:'Partnership expansion', c:'var(--color-access)', h:'2h/wk'}],
+    [{t:'Board/coalition next-year framing', c:'var(--color-access)', h:'2h/wk'}],
+    [{t:'Annual impact report', c:'var(--color-access)', h:'2h/wk'}]
+  ]},
+  {name:'Scholarship', sub:'Public Health manuscript, TN APRN study, Ethiopia/Iraq rapid project', months:[
+    [{t:'Public Health manuscript sprint', c:'var(--color-scholar)', h:'3h/wk'}],
+    [{t:'Ethiopia/Iraq protocol + partners', c:'var(--color-scholar)', h:'3h/wk'}],
+    [{t:'Rapid data collection', c:'var(--color-scholar)', h:'4h/wk'}],
+    [{t:'Analysis + brief/manuscript draft', c:'var(--color-scholar)', h:'4h/wk'}],
+    [{t:'Conference content extraction', c:'var(--color-scholar)', h:'2h/wk'}],
+    [],
+    [{t:'Sigma TN APRN barriers output', c:'var(--color-scholar)', h:'2h/wk'}],
+    [{t:'Policy brief drafting', c:'var(--color-scholar)', h:'2h/wk'}],
+    [{t:'Follow-up manuscript work', c:'var(--color-scholar)', h:'2h/wk'}],
+    [{t:'Submission / revision burst', c:'var(--color-scholar)', h:'2h/wk'}],
+    [],
+    [{t:'AANP evidence content', c:'var(--color-scholar)', h:'2h/wk'}],
+    [{t:'Results packaging', c:'var(--color-scholar)', h:'2h/wk'}],
+    [],
+    [{t:'Presentation or article refinement', c:'var(--color-scholar)', h:'2h/wk'}],
+    []
+  ]},
+  {name:'JHU / SONSIEL / Global', sub:'IPS-aligned output, UN liaison cadence, CoNGO aging work', months:[
+    [{t:'Scope IPS-aligned proposal', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Launch SONSIEL reporting cadence', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Monthly digest + event briefs', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Quarter setup with metrics', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'UN-facing visibility opportunities', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Quarterly board metrics', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Nurse engagement pathway build', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'IPS deliverable progression', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Webinar / global policy output', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Quarterly board metrics', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'UN/global nursing output', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Cadence maintenance', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Pathway recruitment refresh', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Quarterly board metrics', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Global thought leadership', c:'var(--color-global)', h:'2h/wk'}],
+    [{t:'Annual review and next-step framing', c:'var(--color-global)', h:'2h/wk'}]
+  ]},
+  {name:'AHCA / Conferences', sub:'Education subcommittee, care coordination, UNM, AANP', months:[
+    [{t:'AHCA education roadmap', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Meeting cadence + agenda set', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Quarter education topic build', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'UNM prep and speaking logistics', c:'var(--color-ahca)', h:'3h/wk'}],
+    [{t:'UNM Mentoring Conference', c:'var(--color-ahca)', h:'4h/wk', travel:true}],
+    [{t:'Post-conference content reuse', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Subcommittee maintenance', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Care coordination participation', c:'var(--color-ahca)', h:'1h/wk'}],
+    [{t:'Quarter education topic build', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'National presentation planning', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'AANP 2027 content refinement', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Maintenance', c:'var(--color-ahca)', h:'1h/wk'}],
+    [{t:'Education agenda refresh', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Abstract / webinar packaging', c:'var(--color-ahca)', h:'2h/wk'}],
+    [{t:'Maintenance', c:'var(--color-ahca)', h:'1h/wk'}],
+    [{t:'Next cycle planning', c:'var(--color-ahca)', h:'1h/wk'}]
+  ]},
+  {name:'A4AL / low-weight', sub:'Remain present with minimal drag', months:[
+    [],[{t:'Board touchpoint', c:'var(--color-low)', h:'1h/wk'}],[],[],[],[{t:'Light contribution', c:'var(--color-low)', h:'1h/wk'}],[],[],[{t:'Annual touchpoint', c:'var(--color-low)', h:'1h/wk'}],[],[],[{t:'Visibility renewal', c:'var(--color-low)', h:'1h/wk'}],[],[],[{t:'Board value renewal', c:'var(--color-low)', h:'1h/wk'}],[]
+  ]}
+];
+const calendar = document.getElementById('calendar');
+function makeCell(text, cls=''){ const d=document.createElement('div'); d.className='cell '+cls; d.innerHTML=text; return d; }
+calendar.appendChild(makeCell('Entity / month','head rowhead'));
+months.forEach(m=>calendar.appendChild(makeCell(m,'head')));
+rows.forEach(r=>{
+  calendar.appendChild(makeCell(`${r.name}<span class="sub">${r.sub}</span>`,'rowhead'));
+  r.months.forEach(list=>{
+    const c=document.createElement('div'); c.className='cell';
+    const box=document.createElement('div'); box.className='monthbox';
+    if(!list.length){ box.innerHTML='<span class="muted">—</span>'; }
+    list.forEach(item=>{
+      const b=document.createElement('div'); b.className='block'+(item.travel?' travel':''); b.style.background=item.c;
+      b.innerHTML = `${item.t}<span class="hours">${item.h}</span>`;
+      box.appendChild(b);
+    });
+    c.appendChild(box); calendar.appendChild(c);
+  });
+});
+const entities=[
+  {name:'CRC', color:'#0b6e4f', subtitle:'Primary care service line, current clinical load, succession, government affairs', kpis:['Model blueprint and integration charter approved','Pilot sites launched on time and stabilized','Revenue/encounter and margin versus target tracked monthly','Readmission / avoidable transfer trend improves','Harbor Village replacement placed','CT regional successor identified and phased handoff started'], flags:['Highest weekly time demand','Frequent DC/state travel likely for government affairs','Should own weekday prime hours']},
+  {name:'King', color:'#1f4e79', subtitle:'Faculty, coordinator, grants, campus anchor periods', kpis:['Monthly grant digest sent to nursing department','Grant tracker updated weekly','Faculty response/opportunity uptake monitored','On-site weeks protected around term starts and May ceremonies','Course and coordination obligations completed on time'], flags:['Travel to Tennessee in Aug 2026, Jan 2027, late Apr/early May 2027, and May 2027 term start','Friday is the default King block']},
+  {name:'VUSN', color:'#8c1d40', subtitle:'Operationalize board, presidency visibility, legacy outputs', kpis:['Committee structure adopted and functioning','Regular board and committee cadence established','Dr. Sarah Fogel writing award advanced or launched','At least one additional signature legacy item completed','Alumni engagement metrics trended quarterly'], flags:['Sept 2026 start is a major visibility moment because it overlaps with ICN-NP']},
+  {name:'Access to Care TN', color:'#d97706', subtitle:'Bylaws, membership redesign, policy identity, coalition action', kpis:['Bylaws revised and adopted','Individual + organizational membership structure operational','Monthly steering rhythm sustained','Policy letters/testimony/meetings documented','At least one standout statewide event or campaign executed'], flags:['Keep this lean but visible; best done in Friday or evening policy blocks']},
+  {name:'Scholarship', color:'#6d28d9', subtitle:'Compressed writing and research sprints', kpis:['Public Health manuscript submitted','Ethiopia/Iraq project completed in 4–6 months','At least one APRN barriers policy or scholarly output produced','AANP and related content fed by actual project data'], flags:['Must be sprint-based, not diffuse','Best protected in Friday AM or weekend micro-blocks']},
+  {name:'JHU / SONSIEL / Global', color:'#0f766e', subtitle:'UN aging, IPS-aligned work, pathway building', kpis:['Monthly digest issued','One-page event reports filed within 5 business days','Quarterly board metrics dashboard updated','At least one IPS-aligned output produced within 6–8 months','Nurse engagement pathway advancement documented'], flags:['Good platform for national/international positioning if outputs stay disciplined']},
+  {name:'AHCA / Conferences', color:'#7c3aed', subtitle:'Education subcommittee, care coordination, UNM, AANP', kpis:['Education subcommittee cadence established','Quarterly educational agenda delivered','UNM conference commitment executed smoothly','AANP 2027 content advanced on schedule','Care coordination role maintained without excess drag'], flags:['UNM week is travel-flagged in Oct 2026']},
+  {name:'A4AL / low-weight', color:'#6b7280', subtitle:'Minimal but intentional contribution', kpis:['1–2 advisory contributions annually','Board visibility maintained','No major schedule creep'], flags:['This role should stay strictly limited']}];
+const dashboards=document.getElementById('dashboards');
+entities.forEach(e=>{
+  const card=document.createElement('div'); card.className='card';
+  card.innerHTML=`<h3>${e.name}</h3><p class="muted small" style="margin-top:.4rem;">${e.subtitle}</p><div style="height:10px;width:90px;border-radius:999px;background:${e.color};margin:1rem 0"></div>`;
+  const k=document.createElement('div'); k.className='kpis';
+  e.kpis.forEach(x=>{ const d=document.createElement('div'); d.className='kpi'; d.textContent=x; k.appendChild(d); });
+  e.flags.forEach(x=>{ const d=document.createElement('div'); d.className='kpi'; d.innerHTML=`<span class="flag high">Operational note</span> ${x}`; k.appendChild(d); });
+  card.appendChild(k); dashboards.appendChild(card);
+});
+new Chart(document.getElementById('hoursChart'),{
+  type:'doughnut',
+  data:{labels:['CRC','King','VUSN','Access TN','Scholarship','Global','AHCA/Conf','Buffer'],datasets:[{data:[32,9,4,3,3,2,2,5],backgroundColor:['#0b6e4f','#1f4e79','#8c1d40','#d97706','#6d28d9','#0f766e','#7c3aed','#9ca3af']}]},
+  options:{plugins:{legend:{position:'bottom'}},cutout:'62%'}
+});
+(function(){ const t=document.querySelector('[data-theme-toggle]'); let d='light'; t.addEventListener('click',()=>{d=d==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',d);});})();
+</script>
+</body>
+</html>
